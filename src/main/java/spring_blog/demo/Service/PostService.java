@@ -55,4 +55,19 @@ public class PostService {
         post.setUser(userRepository.getOne(1L));
     postRepository.save(post);
     }
+
+    public void deletePost(Long post_id) {
+          postRepository.deleteById(post_id);
+        }
+
+
+
+    public void updatePost (Long post_id, Post updatedPost){
+        Post post = postRepository.getOne(post_id);
+        post.setTitle(updatedPost.getTitle());
+        post.setContent(updatedPost.getContent());
+        post.setCategory(updatedPost.getCategory());
+        postRepository.save(post);
+
+        }
 }

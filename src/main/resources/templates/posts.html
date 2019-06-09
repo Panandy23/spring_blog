@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Clean Blog</title>
+  <title>Andy's Blog</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -57,7 +57,7 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
             <h1>Clean Blog</h1>
-            <span class="subheading">A Blog Theme by Start Bootstrap</span>
+            <span class="subheading">A Blog Theme Andy</span>
           </div>
         </div>
       </div>
@@ -82,8 +82,14 @@
 
         <!-- Pager -->
         <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+          <form th:action="@{'/deletePost/' + ${post.getId()}}" th:method="delete">
+            <input class="btn btn-primary float-right" type="submit" value="delete">
+          </form>
+          <form th:action="@{'/update/' + ${post.getId()}}" th:method="get">
+            <input class="btn btn-primary float-right" type="submit" value="update">
+          </form>
         </div>
+
       </div>
     </div>
   </div>
