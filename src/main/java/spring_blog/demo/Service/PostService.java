@@ -27,16 +27,32 @@ public class PostService {
         this.userRepository = userRepository;
     }
 
-    public List<Post> viewAll (){
+    public List<Post> viewAll() {
         return postRepository.findAll();
     }
 
-    public Post getPostById (Long post_id){
-        if(postRepository.findById(post_id).isPresent()) {
+    public Post getPostById(Long post_id) {
+        if (postRepository.findById(post_id).isPresent()) {
             return postRepository.getOne(post_id);
         }
         return new Post();
     }
 
+    public String addComment(Long post_id, Long user_id, Comment comment) {
+        if (postRepository.findById(post_id).isPresent()) {
+            Post post = postRepository.getOne(post_id);
+            User user = userRepository.getOne(user_id);
+            comment.setPost(post);
+            comment.setUser(user);
+            commentRepository.save(comment);
+            return "dodano komentarz";
+        }
+        return "błędne id posta lub użytkownika";
+    }
 
+    public void savePost(Post post) {
+
+        post.setUser(userRepository.getOne(1L));
+    postRepository.save(post);
+    }
 }
