@@ -22,4 +22,11 @@ public class PostService {
         return postRepository.findAll();
     }
 
+    public Post getPostById (Long post_id){
+        if(postRepository.findById(post_id).isPresent()) {
+            return postRepository.getOne(post_id);
+        }
+        return new Post();
+    }
+
 }
