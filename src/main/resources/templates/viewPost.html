@@ -80,7 +80,7 @@
 </article>
 <hr>
 <h1 th:align="center">Comments</h1>
-<div class="container">
+<div class="container" th:if="${post.getComment().size() > 0}">
   <div class="row" th:each="comment : ${post.getComment()}">
     <div class="col-lg-8 col-md-10 mx-auto">
       <p th:text="${comment.getMessage()}">message</p>
@@ -88,6 +88,18 @@
     </div>
   </div>
 </div>
+<div class="container" th:if="${post.getComment().size() == 0}">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <p>Post czeka na komentarz</p>
+    </div>
+  </div>
+</div>
+
+<h1 th:align="center">Add comment</h1>
+<form th:action="@{'/addComment/ + ${post.getId()} + '/1'}" th:object="${comment}" th:method="post">
+<input type="text" th:field="*{message}" placeholder="input your opinion" required>
+  <input type="submit" value="send">
 
 <!-- Footer -->
 <footer>
